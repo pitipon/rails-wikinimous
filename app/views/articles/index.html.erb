@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+
+      <br>
+
+
+      <form action="/articles" method="post">
+        <%= form_for(@article) do |f| %>
+
+        <%= f.text_field :title , placeholder: "title", :class => 'form-control mr-sm-2'%>
+
+        <%= f.text_area :context ,placeholder: "context",  :class => 'form-control mr-sm-2' %>
+
+        <%= f.submit 'create', :class => 'btn btn-outline-success my-4 my-sm-0' %>
+        <% end %>
+      </form>
+      <br>
+
+      <!-- Tasks List -->
+      <% @articles.reverse_each do |article| %>
+      <div class="alert alert-info" role="alert">
+        <h3> <%= "#{article.title}" %> </h3>
+        <br>
+        <%= "#{article.context}" %>
+        <br>
+        <%= link_to "Edit", edit_article_path(article) %> |
+        <%= link_to "Delete", article_path(article),
+          method: :delete,
+          data: { confirm: "Are you sure?" } %>
+      </div>
+      <% end %>
+
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+</div>
